@@ -13,7 +13,7 @@ class Forerunner
     path = @base_path + project
     Dir.chdir path
 
-    TermMe.go path
+    TermMe.open path # make optional
 
     puts "--| #{project} - " + `cat .foreman`
     Dir.mkdir 'log' if !File.directory?('log')

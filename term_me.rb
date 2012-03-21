@@ -1,7 +1,7 @@
 require 'iterm_window'
 
 class TermMe
-  def self.go path
+  def self.open path
     puts path
     ItermWindow.current do
       open_tab :my_tab do

@@ -3,6 +3,7 @@ require_relative 'forerunner'
 
 enable :sessions
 
+base_path = Dir.home
 default_projects = %w{cas wld-api-router wld-service-site portal portal-sites wld-service-communication wld-service-member wld-service-search mobile}
 
 get '/' do
