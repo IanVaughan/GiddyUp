@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export WLD_SITE_ID=1000
+echo "Using WLD_SITE_ID:$WLD_SITE_ID"
 
 base_path='/Users/ivaughan/Projects'
 #projects="cas wld-api-router wld-service-site portal portal-sites  "
