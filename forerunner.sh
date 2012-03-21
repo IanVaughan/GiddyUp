@@ -11,9 +11,13 @@ run() {
   cd ${base_path}/$1
   echo -e "--| $1 - on" `cat .foreman`
   mkdir -p log
+  touch log/development.log
   rbenv shell `cat .rbenv-version`
   nohup foreman start > log/foreman.log 2>&1 &
   #(nohup foreman start > $1.log && sleep 1000000000) &
+  port=`cat .foreman | awk '{ print $2 }'`
+  #echo "Opening : $port"
+  #open http://0.0.0.0:$port
 }
 
 pid() {

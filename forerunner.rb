@@ -1,65 +1,35 @@
-require 'open3'
-
-# List branches for each project in drop down
-
 class Forerunner
 
-  attr_accessor :threads
+  #attr_accessor :threads
 
-  def initialize
+  def initialize base_path = '.'
     @threads = {}
-  end
-
-  def projects base_path = '.'
-    `ls #{base_path}`.split(' ')
-  end
-
-  def self.test
-    count = 0
-    threads = {}
-    2.times do |i|
-      threads[i] = Thread.new do
-        sleep(rand(0.1))
-        Thread.current[:mycount] = count
-        count += 1
-      end
-    end
-    threads.class
-    threads.each { |t|
-      t.join
-      #puts t.inspect
-      #t.each { |tt| puts tt.inspect }
-      print t[1][:mycount], ", "
-    }
-    puts "count = #{count}"
+    @base_path = base_path
   end
 
   def launch project
-    `cd #{base_path}/#{project}`
-    print "--| #{project} - on" `cat .foreman`
-    `mkdir -p log`
+    Dir.chdir @base_path + project
+
+    puts "--| #{project} - " + `cat .foreman`
+    Dir.mkdir 'log' if !File.directory?('log')
     ver = `cat .rbenv-version`
-    `rbenv shell #{ver}`
-    `nohup foreman start > log/foreman.log 2>&1 &`
+    #`. ~/.profile; rbenv shell #{ver}; foreman start > log/foreman.log 2>&1`
+    exec '. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1'
+    #`nohup foreman start > log/foreman.log 2>&1 &`
+    #{}`foreman start > log/foreman.log 2>&1`
   end
 
-  def start base_path, project
-    puts "#project : #{project}"
+  def start project
     @threads[project] = Thread.new(project) do |p|
-      puts "=== start #{p} ==="
-      #stdin, stdout, stderr = Open3.popen3("cd #{p}; foreman start")
-      #Thread.current[:stdin] = stdin
-      #Thread.current[:stdout] = stdout
-      #Thread.current[:stderr] = stderr
-      Thread.current[:io] = IO.popen(". ~/.profile; cd #{base_path+project}; rbenv shell `cat .rbenv-version`; foreman start")
-      #sleep 3
-      puts '--- started'
+      Thread.current[:pid] = fork do
+        #Signal.trap('HUP', 'IGNORE') # Don't die upon logout
+        launch project
+      end
     end
-    puts '--- start:end'
   end
 
-  def boot selection
-    selection.each { |p| start p }
+  def boot projects
+    projects.each { |p| start p }
   end
 
   def list
@@ -69,8 +39,9 @@ class Forerunner
       #puts thread[:stdout]
       #puts thread[:stderr]
       #puts thread.inspect
-      puts thread[:io].readlines unless thread[:io].nil?
+      puts thread[:pid] unless thread[:pid].nil?
     end
   end
-
 end
+
+#Process.detach(pid)
