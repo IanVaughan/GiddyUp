@@ -10,7 +10,9 @@ class Forerunner
   end
 
   def launch project
-    Dir.chdir @base_path + project
+    path = @base_path + project
+    Dir.chdir path
+
     TermMe.go path
 
     puts "--| #{project} - " + `cat .foreman`
@@ -20,6 +22,8 @@ class Forerunner
     exec '. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1'
     #`nohup foreman start > log/foreman.log 2>&1 &`
     #{}`foreman start > log/foreman.log 2>&1`
+
+    # never gets here!
   end
 
   def start project
