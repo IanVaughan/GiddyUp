@@ -1,3 +1,5 @@
+require_relative 'term_me'
+
 class Forerunner
 
   #attr_accessor :threads
@@ -9,6 +11,7 @@ class Forerunner
 
   def launch project
     Dir.chdir @base_path + project
+    TermMe.go path
 
     puts "--| #{project} - " + `cat .foreman`
     Dir.mkdir 'log' if !File.directory?('log')
