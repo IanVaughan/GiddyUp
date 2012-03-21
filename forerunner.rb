@@ -74,36 +74,3 @@ class Forerunner
   end
 
 end
-
-class Runner
-  def initialize
-    fr = Forerunner.new
-    fr.boot
-    fr.list
-  end
-end
-
-# http://tech.natemurray.com/2007/03/ruby-shell-commands.html
-
-class Test
-  def self.run
-    fr = Forerunner.new
-    fr.start '/Users/ivaughan/Projects/', 'cas' #'wld-service-site'
-    p 'ok'
-    10.times { sleep 1; fr.list }
-    p 'end'
-  end
-end
-
-
-class Demo
-
-  base_path = '/Users/ivaughan/Projects/'
-
-  projects = %w{cas wld-api-router wld-service-site portal portal-sites}
-
-  ruby_ver = proc { 'cat .rbenv' }
-  ex = "cd #{projects[0]}; rbenv  foreman start"
-  p a
-
-end
