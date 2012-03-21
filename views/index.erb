@@ -7,6 +7,10 @@
         start_projects();
         e.preventDefault();
       });
+      $('#stop_btn').click(function(e) {
+        stop_projects();
+        e.preventDefault();
+      });
 
       $('a').click(function(e) {
         var selected_projects = {};
@@ -21,6 +25,14 @@
       var selected_projects = {};
       $('input:checkbox:checked').each(function () {
         selected_projects[$(this).attr('name')] = 'start';
+      });
+      post_data(selected_projects);
+    }
+
+    function stop_projects() {
+      var selected_projects = {};
+      $('input:checkbox:checked').each(function () {
+        selected_projects[$(this).attr('name')] = 'stop';
       });
       post_data(selected_projects);
     }
@@ -52,4 +64,4 @@
 </p>
 
 <input id="start_btn" type="submit" value="Start all selected"/>
-
+<input id="stop_btn" type="submit" value="Stop all selected"/>
