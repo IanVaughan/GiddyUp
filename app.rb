@@ -13,6 +13,8 @@ get '/' do
 end
 
 post '/start' do
-  list = params.each_key.collect { |x| x }
-  session[:runner].boot list
+  start_list = params.each_pair.collect { |key, value| key if value == 'start' }.compact
+  stop_list = params.each_pair.collect { |key, value| key if value == 'stop' }.compact
+  session[:runner].boot_up start_list if !start_list.empty?
+  session[:runner].tear_down stop_list if !stop_list.empty?
 end
