@@ -3,7 +3,9 @@ require_relative 'term_me'
 class Forerunner
 
   def initialize base_path = '.'
-    @threads = {}
+    puts 'initialize'
+    @pid ||= {}
+    puts @pid.inspect
     @base_path = base_path
   end
 
@@ -26,19 +28,21 @@ class Forerunner
   end
 
   def start project
-    @threads[project] = Thread.new(project) do |p|
-      Thread.current[:pid] = fork do
+    @pid[project] = fork do
         launch project
-      end
     end
+    puts @pid.inspect
   end
 
   def stop project
-    puts @threads[project][:pid] if !@threads.empty?
+    puts "stop : #{project}"
+    puts @pid.inspect
+    puts @pid[project] if !@pid.empty?
   end
 
   def boot_up projects
     projects.each { |p| start p }
+    puts @pid.inspect
   end
 
   def tear_down projects
@@ -46,9 +50,8 @@ class Forerunner
   end
 
   def list
-    @threads.each_pair do |key, thread|
-      puts "list : #{key}"
-      puts thread[:pid] unless thread[:pid].nil?
+    @pid.each_pair do |key, pid|
+      puts "list : #{key} => #{pid}"
     end
   end
 end
