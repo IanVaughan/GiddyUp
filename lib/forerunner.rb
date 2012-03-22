@@ -3,9 +3,7 @@ require_relative 'term_me'
 class Forerunner
 
   def initialize base_path = '.'
-    puts 'initialize'
     @pid ||= {}
-    puts @pid.inspect
     @base_path = base_path
   end
 
@@ -29,15 +27,14 @@ class Forerunner
 
   def start project
     @pid[project] = fork do
-        launch project
+      launch project
     end
-    puts @pid.inspect
   end
 
   def stop project
     puts "stop : #{project}"
-    puts @pid.inspect
     puts @pid[project] if !@pid.empty?
+    Process.kill("KILL", @pid[project])
   end
 
   def boot_up projects

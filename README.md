@@ -11,3 +11,4 @@ tail log files / link to open in tabs or in term?
 
 #Process.detach(pid)
 
+tick/untick all
