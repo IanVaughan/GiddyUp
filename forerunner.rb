@@ -2,8 +2,6 @@ require_relative 'term_me'
 
 class Forerunner
 
-  #attr_accessor :threads
-
   def initialize base_path = '.'
     @threads = {}
     @base_path = base_path
@@ -14,14 +12,15 @@ class Forerunner
     Dir.chdir path
 
     TermMe.open path project # make optional
+    # port = `cat .foreman | awk '{ print $2 }'`
+    # open http://0.0.0.0:$port
 
     puts "--| #{project} - " + `cat .foreman`
+
     Dir.mkdir 'log' if !File.directory?('log')
-    ver = `cat .rbenv-version`
-    #`. ~/.profile; rbenv shell #{ver}; foreman start > log/foreman.log 2>&1`
+    # touch log/development.log
+
     exec '. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1'
-    #`nohup foreman start > log/foreman.log 2>&1 &`
-    #{}`foreman start > log/foreman.log 2>&1`
 
     # never gets here!
   end
@@ -29,7 +28,6 @@ class Forerunner
   def start project
     @threads[project] = Thread.new(project) do |p|
       Thread.current[:pid] = fork do
-        #Signal.trap('HUP', 'IGNORE') # Don't die upon logout
         launch project
       end
     end
@@ -40,15 +38,9 @@ class Forerunner
   end
 
   def list
-    #@threads.each(&:join)
     @threads.each_pair do |key, thread|
       puts "list : #{key}"
-      #puts thread[:stdout]
-      #puts thread[:stderr]
-      #puts thread.inspect
       puts thread[:pid] unless thread[:pid].nil?
     end
   end
 end
-
-#Process.detach(pid)
