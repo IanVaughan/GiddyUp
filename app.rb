@@ -1,5 +1,5 @@
 require 'sinatra'
-require_relative 'forerunner'
+require_relative 'lib/forerunner'
 
 enable :sessions
 

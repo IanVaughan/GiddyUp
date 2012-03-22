@@ -11,7 +11,7 @@ class Forerunner
     path = @base_path + project
     Dir.chdir path
 
-    TermMe.open path project # make optional
+    TermMe.open path, project # make optional
     # port = `cat .foreman | awk '{ print $2 }'`
     # open http://0.0.0.0:$port
 
