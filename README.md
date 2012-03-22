@@ -36,6 +36,12 @@ Ideas/Todos
 
     Process.detach(pid)
 
+- turn into gem
+
+- make so can start and app itself goes into background (demon)
+
+- add call, control and status off, vm-control
+
 
 ### Views
 
