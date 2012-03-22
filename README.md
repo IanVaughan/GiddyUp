@@ -1,19 +1,36 @@
+Forerunner
+==========
+
+Crap name, handy tool.
+
+A web based view to select and control the running of our projects.
+
+1. It gives you a list of available projects
+
+1. you select which ones you want to start
+
+1. hit start
+
+1. it spins them up behind the scenes (using `foreman start`)
+
+1. and opens up a new term tab for each tailing the log
+
+
+To start it :-
+
+    ruby app.rb
 
 
 Ideas/Todos
 -----------
-- List branches for each project in drop down
 
-- add field for port number (defaulted from forman, can override)
+### Main
 
-- fix tail log files in open iterm
+- fix tail of log files in open iterms, it runs to fast
 
-- maybe add link to open the log file in tabs
+- Fix so this is set as required for one of the projects (`mobile`)
 
-- I think this is required
-
-#export WLD_SITE_ID=1000
-#echo "Using WLD_SITE_ID:$WLD_SITE_ID"
+    export WLD_SITE_ID=1000
 
 - should this be used?
 
@@ -28,3 +45,10 @@ Ideas/Todos
 
 - then get projects from dir and not default_projects
 
+- List branches for each project in drop down
+
+- add field for port number (defaulted from forman, can override)
+
+- add option to open log file in term/tab
+
+- maybe add link to open the log file in tabs
