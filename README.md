@@ -1,14 +1,30 @@
-# List branches for each project in drop down
-
-field for port number (default from forman, can override)
-
-tail log files / link to open in tabs or in term?
 
 
+Ideas/Todos
+-----------
+- List branches for each project in drop down
+
+- add field for port number (defaulted from forman, can override)
+
+- fix tail log files in open iterm
+
+- maybe add link to open the log file in tabs
+
+- I think this is required
 
 #export WLD_SITE_ID=1000
 #echo "Using WLD_SITE_ID:$WLD_SITE_ID"
 
-#Process.detach(pid)
+- should this be used?
 
-tick/untick all
+    Process.detach(pid)
+
+
+### Views
+
+- add tick/untick
+
+- add field to add/remove base path for projects (remove default path from app)
+
+- then get projects from dir and not default_projects
+
