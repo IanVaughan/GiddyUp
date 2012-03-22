@@ -40,7 +40,7 @@
     function post_data(selected_projects) {
       $.ajax({
         type: "POST",
-        url: "start",
+        url: "perform",
         data: selected_projects,
       }).done(function( msg ) {
         //alert( "Message: " + msg );
@@ -55,7 +55,6 @@
 <p>
   Projects:-
 </p>
-
 
 <p>
   <% for @project in @projects %>

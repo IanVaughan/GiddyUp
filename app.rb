@@ -12,7 +12,7 @@ get '/' do
   erb :index
 end
 
-post '/start' do
+post '/perform' do
   start_list = params.each_pair.collect { |key, value| key if value == 'start' }.compact
   stop_list = params.each_pair.collect { |key, value| key if value == 'stop' }.compact
   session[:runner].boot_up start_list if !start_list.empty?
