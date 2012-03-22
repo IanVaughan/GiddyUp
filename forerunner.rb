@@ -33,8 +33,16 @@ class Forerunner
     end
   end
 
-  def boot projects
+  def stop project
+    puts @threads[project][:pid] if !@threads.empty?
+  end
+
+  def boot_up projects
     projects.each { |p| start p }
+  end
+
+  def tear_down projects
+    projects.each { |p| stop p }
   end
 
   def list
