@@ -1,7 +1,15 @@
-<label>
-  <input type="checkbox" name="<%=@project%>">
-  <%= @project %>
-</label>
-
-<a href="/" rel="<%=@project%>">start</a>
-<a href="/" rel="<%=@project%>">stop</a>
+<td>
+  <label>
+    <input type="checkbox" name="<%=@project%>">
+    <%= @project %>
+  </label>
+</td>
+<td>
+  <a href="/" rel="<%=@project%>">start</a>
+</td>
+<td>
+  <a href="/" rel="<%=@project%>">stop</a>
+</td>
+<td>
+  <a href="0.0.0.0:<%=@port%>" target="_blank">link</a>
+</td>

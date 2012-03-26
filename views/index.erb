@@ -54,12 +54,18 @@
 <p>
   Projects:-
 </p>
+<table border="0">
+  <tr>
+    <%= erb :_header %>
+  </tr>
+  <% for @project in @projects %>
+    <tr>
+      <%= erb :_project %>
+    </tr>
+  <% end %>
+</table>
 
 <p>
-  <% for @project in @projects %>
-    <%= erb :_project %> <br/>
-  <% end %>
+  <input id="start_btn" type="submit" value="Start all selected"/>
+  <input id="stop_btn" type="submit" value="Stop all selected"/>
 </p>
-
-<input id="start_btn" type="submit" value="Start all selected"/>
-<input id="stop_btn" type="submit" value="Stop all selected"/>
