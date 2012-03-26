@@ -12,6 +12,15 @@ get '/' do
   erb :index
 end
 
+get '/list/:path' do
+  puts " #{params[:path]}"
+end
+
+get '/die' do
+  session[:runner] = nil
+  redirect to('/')
+end
+
 post '/perform' do
   start_list = params.each_pair.collect { |key, value| key if value == 'start' }.compact
   stop_list = params.each_pair.collect { |key, value| key if value == 'stop' }.compact
