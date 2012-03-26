@@ -9,6 +9,7 @@ class Forerunner
 
   def launch project
     path = @base_path + project
+    current_dir = Dir.pwd
     Dir.chdir path
 
     TermMe.open path, project # make optional
@@ -20,15 +21,17 @@ class Forerunner
     Dir.mkdir 'log' if !File.directory?('log')
     # touch log/development.log
 
-    exec '. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1'
+    pid = Process.spawn('. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1')
+    puts "spawn:#{pid}"
+    puts Process.getpgrp
+    #Process.detach(pid)
 
-    # never gets here!
+    Dir.chdir current_dir
+    pid
   end
 
   def start project
-    @pid[project] = fork do
-      launch project
-    end
+    @pid[project] = launch project
   end
 
   def stop project
