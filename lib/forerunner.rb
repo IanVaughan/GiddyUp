@@ -33,8 +33,12 @@ class Forerunner
 
   def stop project
     puts "stop : #{project}"
-    puts @pid[project] if !@pid.empty?
-    Process.kill("KILL", @pid[project])
+    list
+    unless @pid.empty?
+      puts "killing #{@pid[project]}"
+      Process.kill(:INT, @pid[project])
+      @pid.delete(@pid[project])
+    end
   end
 
   def boot_up projects
