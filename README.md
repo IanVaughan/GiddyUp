@@ -1,7 +1,5 @@
-Forerunner
-==========
-
-Crap name, handy tool.
+GiddUp
+======
 
 A web based view to select and control the running of our projects.
 
@@ -18,7 +16,7 @@ A web based view to select and control the running of our projects.
 
 To start it :-
 
-    ruby app.rb
+    bin/giddyup
 
 
 Ideas/Todos
