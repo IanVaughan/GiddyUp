@@ -1,6 +1,6 @@
 require_relative 'term_me'
 
-class Forerunner
+class GiddyUp
 
   def initialize base_path = '.'
     @pid ||= {}

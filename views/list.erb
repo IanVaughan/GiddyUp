@@ -3,10 +3,12 @@
 
   <script>
     $(document).ready(function() {
+
       $('#start_btn').click(function(e) {
         start_projects();
         e.preventDefault();
       });
+
       $('#stop_btn').click(function(e) {
         stop_projects();
         e.preventDefault();
@@ -14,7 +16,7 @@
 
       $('a').click(function(e) {
         var selected_projects = {};
-        selected_projects[$(this).attr('rel')] = $(this).text();
+        selected_projezcts[$(this).attr('rel')] = $(this).text();
         console.log(selected_projects);
         post_data(selected_projects);
         e.preventDefault();
@@ -43,7 +45,7 @@
         url: "perform",
         data: selected_projects,
       }).done(function( msg ) {
-        //alert( "Message: " + msg );
+        alert( "Message: " + msg );
       });
     }
   </script>
