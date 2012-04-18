@@ -1,5 +1,5 @@
 require 'sinatra'
-require_relative 'lib/forerunner'
+require_relative 'lib/giddyup'
 
 enable :sessions
 
@@ -7,7 +7,7 @@ base_path = Dir.home
 
 get '/' do
   project_path = Dir.home + '/Projects/'
-  session[:runner] ||= Forerunner.new(project_path)
+  session[:runner] ||= GiddyUp.new(project_path)
   @projects = `ls #{project_path}`.split
   @port = '3000'
   erb :index
