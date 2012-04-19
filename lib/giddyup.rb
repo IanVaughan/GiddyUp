@@ -10,16 +10,16 @@ module GiddyUp
 
     def init_logger file, level
       file = File.join(basepath, file) if file.class == String && !file.match(/^[\\\/~]/)
-      level = level.upcase! && %w{ DEBUG INFO WARN ERROR FATAL }.include?(level) ? level : "INFO"
+      level = %w{ DEBUG INFO WARN ERROR FATAL }.include?(level.upcase) ? level : "INFO"
       @logger = Logger.new(file)
       @logger.progname = 'giddyup'
-      # @logger.level = Logger.const_get(level)
+      @logger.level = Logger.const_get(level)
       @logger.debug 'Logger Live!'
     end
 
     # method accessible from Sinatra as defined before run
     def load
-      init_logger STDOUT, "FATAL"
+      init_logger STDOUT, "DEBUG"
       @launcher = Launcher.new Dir.home + '/Projects/'
     end
 
