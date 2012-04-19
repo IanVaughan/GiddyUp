@@ -56,3 +56,16 @@ Ideas/Todos
 - add option to open log file in term/tab
 
 - maybe add link to open the log file in tabs
+
+
+licence
+
+contrib notes
+
+contributors
+Tim js
+
+
+todo
+git up
+
