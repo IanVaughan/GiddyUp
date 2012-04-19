@@ -1,30 +1,35 @@
-require 'sinatra'
-require_relative 'lib/giddyup'
+require 'sinatra/base'
 
-enable :sessions
+module GiddyUp
+  class Server < Sinatra::Base
 
-base_path = Dir.home
+    helpers do
+      def bar(name)
+        "#{name}bar"
+      end
+    end
 
-get '/' do
-  project_path = Dir.home + '/Projects/'
-  session[:runner] ||= GiddyUp.new(project_path)
-  @projects = `ls #{project_path}`.split
-  @port = '3000'
-  erb :index
-end
+    base_path = Dir.home
 
-get '/list/:path' do
-  puts " #{params[:path]}"
-end
+    get '/' do
+      GiddyUp.logger.debug '/'
+      @projects = GiddyUp.launcher.projects
+      @port = '3000'
+      erb :index
+    end
 
-get '/die' do
-  session[:runner] = nil
-  redirect to('/')
-end
+    get '/list/:path' do
+      puts " #{params[:path]}"
+    end
 
-post '/perform' do
-  start_list = params.each_pair.collect { |key, value| key if value == 'start' }.compact
-  stop_list = params.each_pair.collect { |key, value| key if value == 'stop' }.compact
-  session[:runner].boot_up start_list if !start_list.empty?
-  session[:runner].tear_down stop_list if !stop_list.empty?
+    get '/die' do
+      redirect to('/')
+    end
+
+    post '/perform' do
+      Launcher.start = params.each_pair.collect { |key, value| key if value == 'start' }.compact
+      Launcher.stop = params.each_pair.collect { |key, value| key if value == 'stop' }.compact
+    end
+
+  end
 end
