@@ -80,21 +80,21 @@ module GiddyUp
         # TermMe.open path, project # make optional
         # open http://0.0.0.0:$port
 
-        GiddyUp.logger.debug "#{project} - " + `cat .foreman`
+        GiddyUp.logger.debug "port : " + `cat .foreman`
 
         check_app_can_log
 
-        # ENV.update
         # pid = Process.spawn('. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1')
         # pid = Process.spawn('. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1')
         pid = fork do
+          # ENV.update
           # exec '. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1'
           exec GiddyUp.runner, "foreman start" # > log/foreman.log"
         end
 
         GiddyUp.logger.debug "pid:#{pid}, pgrp:#{Process.getpgrp}"
 
-        # Process.detach(pid)
+        Process.detach(pid)
       end
 
       pid
