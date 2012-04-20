@@ -6,20 +6,25 @@ module GiddyUp
 
     def initialize base_path = '.'
       @pid ||= {}
+      @base_path = base_path
       @projects = `ls #{base_path}`.split
     end
 
-    def start args
-      return unless valid args
-      return start_many args if args.is_a? Array
-      start_a args
+    def start projects
+      GiddyUp.logger.debug "#{__method__} -> #{projects}"
+      return unless valid projects
+      projects = [projects] unless projects.is_a? Array
+      projects.each { |p| start! p }
     end
 
-    def stop args
-      return unless valid args
+    def stop projects
+      GiddyUp.logger.debug "#{__method__} -> #{projects}"
+      return unless valid projects
+      projects = [projects] unless projects.is_a? Array
+      projects.each { |p| stop! p }
     end
 
-private
+  private
 
     def valid args
       return if args.nil?
@@ -28,28 +33,26 @@ private
       true
     end
 
-    def start_a project
+    def start! project
       @pid[project] = launch project
-      # log pid
+      GiddyUp.logger.debug @pid[project]
     end
 
-    def stop_a project
-      puts "stop : #{project}"
-      list
+    def stop! project
+      GiddyUp.logger.debug "stop : #{project}"
+      GiddyUp.logger.debug list
       unless @pid.empty?
-        puts "killing #{@pid[project]}"
+        GiddyUp.logger.debug "killing #{@pid[project]}"
         Process.kill(:INT, @pid[project])
         @pid.delete(@pid[project])
       end
     end
 
-    def start_many projects
-      projects.each { |p| start_a p }
-    end
-
-    def stop_many projects
-      projects.each { |p| stop p }
-    end
+    # def kill(signal)
+    #   pid && Process.kill(signal, pid)
+    # rescue Errno::ESRCH
+    #   false
+    # end
 
     def list
       @pid.each_pair do |key, pid|
@@ -57,28 +60,43 @@ private
       end
     end
 
-    private
+    def port
+      `cat .foreman | awk '{ print $2 }'`
+    end
 
-    def launch project
-      path = @base_path + project
-      current_dir = Dir.pwd
-      Dir.chdir path
-
-      # TermMe.open path, project # make optional
-      # port = `cat .foreman | awk '{ print $2 }'`
-      # open http://0.0.0.0:$port
-
-      # puts "--| #{project} - " + `cat .foreman`
-
+    def check_app_can_log
       Dir.mkdir 'log' unless File.directory? 'log'
       # touch log/development.log
+    end
 
-      # pid = Process.spawn('. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1')
-      # puts "spawn:#{pid}"
-      # puts Process.getpgrp
-      #Process.detach(pid)
+    def launch project
+      GiddyUp.logger.debug "#{__method__} -> #{project}"
 
-      Dir.chdir current_dir
+      path = File.join(@base_path, project)
+      GiddyUp.logger.debug "#{__method__} -> #{path}"
+
+      pid = 0
+      Dir.chdir path do
+        # TermMe.open path, project # make optional
+        # open http://0.0.0.0:$port
+
+        GiddyUp.logger.debug "#{project} - " + `cat .foreman`
+
+        check_app_can_log
+
+        # ENV.update
+        # pid = Process.spawn('. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1')
+        # pid = Process.spawn('. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1')
+        pid = fork do
+          # exec '. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1'
+          exec GiddyUp.runner, "foreman start" # > log/foreman.log"
+        end
+
+        GiddyUp.logger.debug "pid:#{pid}, pgrp:#{Process.getpgrp}"
+
+        # Process.detach(pid)
+      end
+
       pid
     end
 
