@@ -7,3 +7,18 @@ require 'giddyup'
 # TODO: added init load poth as a param to a GiddyUp method
 GiddyUp.load
 GiddyUp.start
+launcher = GiddyUp.load Dir.home + '/Projects/'
+
+cmd = ARGV.shift
+case cmd
+when 'server'
+  GiddyUp.start
+when 'start'
+  launcher.start 'wld-api-router'
+else
+  puts 'Unknown or no command given! Options are :-'
+  File.open(__FILE__).each_line do |line|
+    puts "   " + line.sub('when','') if line.include? 'when'
+    break if line.include? 'else'
+  end
+end
