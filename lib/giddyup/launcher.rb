@@ -40,7 +40,7 @@ module GiddyUp
     end
 
     def start! project
-      @pid[project] = launch project
+      @pid[project] = launch project unless @pid.has_key? project
       GiddyUp.logger.debug @pid[project]
     end
 
