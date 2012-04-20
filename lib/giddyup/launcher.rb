@@ -48,18 +48,18 @@ module GiddyUp
       GiddyUp.logger.debug "stop : #{project}"
       GiddyUp.logger.debug list
       unless @pid.empty?
-        GiddyUp.logger.debug "killing #{@pid[project]}"
-        Process.kill(:INT, @pid[project])
+        kill @pid[project]
         @pid.delete(@pid[project])
       end
     end
 
-    # def kill(signal)
-    #   pid && Process.kill(signal, pid)
-    # rescue Errno::ESRCH
-    #   false
-    # end
-
+    def kill pid
+      GiddyUp.logger.debug "killing #{pid}"
+      # pid && Process.kill(signal, pid)
+      Process.kill(:INT, pid)
+    rescue Errno::ESRCH => e
+      GiddyUp.logger.error e
+      false
     end
 
     def port
