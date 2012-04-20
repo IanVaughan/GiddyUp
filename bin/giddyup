@@ -4,9 +4,7 @@ $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
 
 require 'giddyup'
 
-# TODO: added init load poth as a param to a GiddyUp method
-GiddyUp.load
-GiddyUp.start
+# TODO: added init load both as a param to a GiddyUp method
 launcher = GiddyUp.load Dir.home + '/Projects/'
 
 cmd = ARGV.shift
@@ -22,3 +20,7 @@ else
     break if line.include? 'else'
   end
 end
+
+# projects=%w{cas wld-api-router wld-service-site portal portal-sites wld-service-communication wld-service-member wld-service-search mobile}
+# up.boot_up projects
+# up.list

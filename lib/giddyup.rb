@@ -1,3 +1,4 @@
+# require "giddyup/version"
 require 'giddyup/launcher'
 require 'giddyup/server'
 require 'logger'
@@ -18,17 +19,29 @@ module GiddyUp
     end
 
     # method accessible from Sinatra as defined before run
-    def load
+    def load path
       init_logger STDOUT, "DEBUG"
-      @launcher = Launcher.new Dir.home + '/Projects/'
+      @launcher = Launcher.new path
+    end
+
+    def runner
+      File.expand_path("../../bin/giddyup-runner", __FILE__)
     end
 
     def start
       @logger.debug 'start'
       Server.run!
     end
-
     # Cannot access methods here
 
   end
 end
+
+
+# module AModule
+#   class << self
+#     def a_method
+
+#     end
+#   end
+# end
