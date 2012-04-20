@@ -36,12 +36,3 @@ module GiddyUp
 
   end
 end
-
-
-# module AModule
-#   class << self
-#     def a_method
-
-#     end
-#   end
-# end
