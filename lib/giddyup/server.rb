@@ -27,8 +27,8 @@ module GiddyUp
     end
 
     post '/perform' do
-      Launcher.start = params.each_pair.collect { |key, value| key if value == 'start' }.compact
-      Launcher.stop = params.each_pair.collect { |key, value| key if value == 'stop' }.compact
+      GiddyUp.launcher.start params.each_pair.collect { |key, value| key if value == 'start' }.compact
+      GiddyUp.launcher.stop params.each_pair.collect { |key, value| key if value == 'stop' }.compact
     end
 
   end
