@@ -24,6 +24,12 @@ module GiddyUp
       projects.each { |p| stop! p }
     end
 
+    def list
+      @pid.each_pair do |key, pid|
+        puts "list : #{key} => #{pid}"
+      end
+    end
+
   private
 
     def valid args
@@ -54,10 +60,6 @@ module GiddyUp
     #   false
     # end
 
-    def list
-      @pid.each_pair do |key, pid|
-        puts "list : #{key} => #{pid}"
-      end
     end
 
     def port
