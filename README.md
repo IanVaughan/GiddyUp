@@ -1,5 +1,5 @@
-GiddUp
-======
+GiddyUp
+=======
 
 A web based view to select and control the running of our projects.
 
