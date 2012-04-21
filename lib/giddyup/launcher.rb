@@ -56,7 +56,7 @@ module GiddyUp
     end
 
     def kill pid
-      GiddyUp.logger.debug "killing #{pid}"
+      GiddyUp.logger.debug "kill -> #{pid}"
       # pid && Process.kill(signal, pid)
       Process.kill(:INT, pid)
     rescue Errno::ESRCH => e
@@ -90,13 +90,12 @@ module GiddyUp
         # pid = Process.spawn('. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1')
         # pid = Process.spawn('. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1')
         pid = fork do
-          # ENV.update
+          # ENV.update etc
           # exec '. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1'
           exec GiddyUp.runner, "foreman start" # > log/foreman.log"
         end
 
-        GiddyUp.logger.debug "pid:#{pid}, pgrp:#{Process.getpgrp}"
-
+        GiddyUp.logger.info "Launched #{project} with pid:#{pid}, pgrp:#{Process.getpgrp}"
         Process.detach(pid)
       end
 
@@ -104,9 +103,9 @@ module GiddyUp
     end
 
     def open_web_page port, path = ''
-      GiddyUp.logger.debug "open_web_page -> #{port}"
+      GiddyUp.logger.debug "#{__method__} -> #{port}"
       pid = fork do
-        sleep 2
+        sleep 3
         exec "open http://0.0.0.0:#{port}/#{path}"
       end
       Process.detach pid
