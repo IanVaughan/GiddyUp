@@ -2,12 +2,14 @@ require 'giddyup/term_me'
 
 module GiddyUp
   class Launcher
-    attr_accessor :projects
+    attr_accessor :projects, :open_terminal, :open_browser
 
     def initialize base_path = '.'
       @pid ||= {}
       @base_path = base_path
       @projects = `ls #{base_path}`.split
+      @open_terminal = true
+      @open_browser = true
     end
 
     def start projects
@@ -63,7 +65,7 @@ module GiddyUp
     end
 
     def port
-      `cat .foreman | awk '{ print $2 }'`
+      `cat .foreman | awk '{ print $2 }'`.chomp
     end
 
     def check_app_can_log
@@ -79,12 +81,11 @@ module GiddyUp
 
       pid = 0
       Dir.chdir path do
-        # TermMe.open path, project # make optional
-        # open http://0.0.0.0:$port
-
         GiddyUp.logger.debug "port : " + `cat .foreman`
-
         check_app_can_log
+
+        # GiddyUp::TermMe.open path, project if @open_terminal
+        open_web_page port, 'status' if open_browser
 
         # pid = Process.spawn('. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1')
         # pid = Process.spawn('. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1')
@@ -100,6 +101,15 @@ module GiddyUp
       end
 
       pid
+    end
+
+    def open_web_page port, path = ''
+      GiddyUp.logger.debug "open_web_page -> #{port}"
+      pid = fork do
+        sleep 2
+        exec "open http://0.0.0.0:#{port}/#{path}"
+      end
+      Process.detach pid
     end
 
   end
