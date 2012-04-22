@@ -42,12 +42,12 @@ module GiddyUp
     end
 
     def start! project
+      GiddyUp.logger.debug "start! -> #{project}"
       @pid[project] = launch project unless @pid.has_key? project
-      GiddyUp.logger.debug @pid[project]
     end
 
     def stop! project
-      GiddyUp.logger.debug "stop : #{project}"
+      GiddyUp.logger.debug "stop! -> #{project}"
       GiddyUp.logger.debug list
       unless @pid.empty?
         kill @pid[project]
@@ -84,11 +84,11 @@ module GiddyUp
         GiddyUp.logger.debug "port : " + `cat .foreman`
         check_app_can_log
 
-        open_web_page port, 'status' if open_browser
         TermMe.open path, project if open_terminal
 
-        # pid = Process.spawn('. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1')
-        # pid = Process.spawn('. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1')
+        url = 'status' # Need to set differently depending on service?
+        open_web_page port, url if open_browser
+
         pid = fork do
           # ENV.update etc
           # exec '. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1'
