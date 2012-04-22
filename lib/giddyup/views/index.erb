@@ -50,12 +50,7 @@
   </script>
 </head>
 
-<h1>GiddyUp Starter</h1>
-
-<p>
-  Projects:-
-</p>
-<table border="0">
+<table class="table zebra-striped table-condensed">
   <tr>
     <%= erb :_header %>
   </tr>
@@ -67,8 +62,7 @@
     </tr>
   <% end %>
 </table>
-<%= erb :_options %>
 <p>
-  <input id="start_btn" type="submit" value="Start all selected"/>
-  <input id="stop_btn" type="submit" value="Stop all selected"/>
+  <input class='btn success' id="start_btn" type="submit" value="Start"/>
+  <input class="btn danger" id="stop_btn" type="submit" value="Stop"/>
 </p>

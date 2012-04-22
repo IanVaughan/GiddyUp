@@ -14,8 +14,6 @@
           <div class="topbar-inner">
             <div class="container">
               <h3><a href="/">GiddyUp Starter</a></h3>
-              <ul class="nav">
-                nav
             </div>
           </div><!-- /topbar-inner -->
         </div><!-- /topbar -->
@@ -25,7 +23,17 @@
     <%if @error then %>
       <div class="alert-message error"><%=@error%></div>
     <% end %>
-      <%= yield %>
+
+    <div class="row">
+        <div class="span11">
+            <%= yield %>
+        </div>
+        <div class="span5">
+            <h1>Ya what?</h1>
+            <p>Select some projects, hit start, and volia, your services are running!</p>
+            <%= erb :_options %>
+        </div>
+    </div>
   </div>
   </body>
 </html>

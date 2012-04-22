@@ -15,6 +15,7 @@ module GiddyUp
       GiddyUp.logger.debug '/'
       @projects = GiddyUp.launcher.projects
       @port = '3000'
+      @running = false
       erb :index
     end
 
