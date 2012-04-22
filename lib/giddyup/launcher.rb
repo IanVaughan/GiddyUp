@@ -88,7 +88,7 @@ module GiddyUp
 
       pid = 0
       Dir.chdir path do
-        GiddyUp.logger.debug "port : " + `cat .foreman`
+        GiddyUp.logger.debug "port : " + port
         check_app_can_log
 
         TermMe.open path, project if open_terminal
