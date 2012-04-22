@@ -1,6 +1,6 @@
 require 'iterm_window'
 
-module GiddupUp
+module GiddyUp
   class TermMe
 
     def self.open path, project

@@ -84,8 +84,8 @@ module GiddyUp
         GiddyUp.logger.debug "port : " + `cat .foreman`
         check_app_can_log
 
-        # GiddyUp::TermMe.open path, project if @open_terminal
         open_web_page port, 'status' if open_browser
+        TermMe.open path, project if open_terminal
 
         # pid = Process.spawn('. ~/.profile; rbenv shell `cat .rbenv-version`; foreman start > log/foreman.log 2>&1')
         # pid = Process.spawn('. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1')
