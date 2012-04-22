@@ -7,7 +7,7 @@ module GiddyUp
     def initialize base_path = '.'
       @pid ||= {}
       @base_path = base_path
-      @projects = `ls #{base_path}`.split
+      @projects = dirs base_path
       @open_terminal = true
       @open_browser = true
     end
@@ -33,6 +33,13 @@ module GiddyUp
     end
 
   private
+
+    def dirs path
+      # Dir.exist?("/tmp") # .keep_if(&:directory?) # all.delete_if { |f| Dir. }
+      all = Dir.entries(path)
+      all.keep_if { |d| Dir.exist? path + d }
+      all.delete_if { |d| d == '.' or d == '..'}
+    end
 
     def valid args
       return if args.nil?
