@@ -7,9 +7,8 @@ module GiddyUp
   class << self
     attr_accessor :launcher, :logger
 
-    basepath = File.expand_path('..', File.dirname(__FILE__))
-
     def init_logger file, level
+      basepath = File.expand_path('..', File.dirname(__FILE__))
       file = File.join(basepath, file) if file.class == String && !file.match(/^[\\\/~]/)
       level = %w{ DEBUG INFO WARN ERROR FATAL }.include?(level.upcase) ? level : "INFO"
       @logger = Logger.new(file)
@@ -20,7 +19,7 @@ module GiddyUp
 
     # method accessible from Sinatra as defined before run
     def load path
-      init_logger STDOUT, "DEBUG"
+      init_logger "log/giddyup.log", "DEBUG"
       @launcher = Launcher.new path
     end
 
