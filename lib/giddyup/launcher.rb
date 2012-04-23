@@ -8,9 +8,7 @@ module GiddyUp
       @pid ||= {}
       @base_path = base_path
       @projects = dirs base_path
-      # config hash
-      @open_terminal = true
-      @open_browser = true
+      @config = {term: true, browser: true}
     end
 
     # Takes a Hash, where
@@ -90,10 +88,10 @@ module GiddyUp
         GiddyUp.logger.debug "port : " + port
         check_app_can_log
 
-        TermMe.open path, project if open_terminal
+        TermMe.open path, project if @config[:term]
 
         url = 'status' # Need to set differently depending on service?
-        open_web_page port, url if open_browser
+        open_web_page port, url if @config[:browser]
 
         pid = fork do
           # ENV.update etc
