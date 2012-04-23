@@ -3,6 +3,11 @@ require 'sinatra/base'
 module GiddyUp
   class Server < Sinatra::Base
 
+    configure do
+      set :public_folder, Proc.new { File.join(root, "static") }
+      # enable :sessions
+    end
+
     helpers do
       def format names
         # "#{name}bar"
