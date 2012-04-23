@@ -11,7 +11,7 @@ module GiddyUp
 
       project_names = dirs base_path
       project_names.each do |name|
-        @projects[name] = Project.new(name, 3000)
+        @projects[name] = Project.new name
       end
 
       @config = {term: true, browser: true}
@@ -54,7 +54,7 @@ module GiddyUp
 
     def start! project
       GiddyUp.logger.debug "start! -> #{project}"
-      @projects[project].pid = launch project unless @projects[project].running?
+      @projects[project].pid, @projects[project].port = launch project unless @projects[project].running?
       GiddyUp.logger.debug list
     end
 
@@ -88,7 +88,7 @@ module GiddyUp
       path = File.join(@base_path, project)
       GiddyUp.logger.debug "#{__method__} -> #{path}"
 
-      pid = 0
+      pid_port = []
       Dir.chdir path do
         GiddyUp.logger.debug "port : " + port
         check_app_can_log
@@ -104,11 +104,12 @@ module GiddyUp
           exec GiddyUp.runner, "foreman start" # > log/foreman.log"
         end
 
-        GiddyUp.logger.info "Launched #{project} with pid:#{pid}, pgrp:#{Process.getpgrp}"
+        pid_port << pid << port
+        GiddyUp.logger.info "Launched #{project} has pid:#{pid} on port:#{port}, pgrp:#{Process.getpgrp}"
         Process.detach(pid)
       end
 
-      pid
+      pid_port
     end
 
     def open_web_page port, path = ''
