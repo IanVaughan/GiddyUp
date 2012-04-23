@@ -9,14 +9,14 @@ A web based view to select and control the running of our projects.
 
 1. hit start
 
-1. it spins them up behind the scenes (using `foreman start`)
+1. it spins them up behind the scenes (using `foreman start` atm)
 
 1. and opens up a new term tab for each tailing the log
 
 
 To start it :-
 
-    bin/giddyup
+    bin/giddyup server
 
 
 Ideas/Todos
@@ -24,26 +24,20 @@ Ideas/Todos
 
 ### Main
 
-- fix tail of log files in open iterms, it runs to fast
+- fix tail of log files in open iTerms, it runs to fast and causes probs
 
-- Fix so this is set as required for one of the projects (`mobile`)
+- Fix so this is set as required for any of the projects (`mobile`)
 
-    export WLD_SITE_ID=1000
-
-- should this be used?
-
-    Process.detach(pid)
+    export SITE_ID=1000
 
 - turn into gem
 
-- make so can start and app itself goes into background (demon)
+- make so can start and app itself goes into background (demon) -> vagas
 
-- add call, control and status off, vm-control
+- add call, control and status off, `vm-control`
 
 
 ### Views
-
-- add tick/untick
 
 - add field to add/remove base path for projects (remove default path from app)
 
@@ -58,14 +52,11 @@ Ideas/Todos
 - maybe add link to open the log file in tabs
 
 
-licence
+## Contrib notes
 
-contrib notes
+## Contributors
 
-contributors
-Tim js
+* TimT -> JavaScript
 
 
-todo
-git up
-
+## Licence
