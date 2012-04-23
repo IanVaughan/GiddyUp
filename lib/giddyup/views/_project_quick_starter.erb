@@ -1,5 +1,3 @@
 <td>
-  <!-- <a href="/" rel="<%=@project%>"><% unless @running %>start<% else %>stop<% end %></a> -->
-  <a href="/" rel="<%=@project%>">start</a>
-  <a href="/" rel="<%=@project%>">stop</a>
+  <a href="/" rel="<%=@project.name%>"><% unless @project.running? %>start<% else %>stop<% end %></a>
 </td>

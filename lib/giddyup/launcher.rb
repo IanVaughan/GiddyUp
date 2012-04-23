@@ -1,13 +1,19 @@
 require 'giddyup/term_me'
+require 'giddyup/project'
 
 module GiddyUp
   class Launcher
     attr_accessor :projects
 
     def initialize base_path = '.'
-      @pid ||= {}
       @base_path = base_path
-      @projects = dirs base_path
+      @projects = {}
+
+      project_names = dirs base_path
+      project_names.each do |name|
+        @projects[name] = Project.new(name, 3000)
+      end
+
       @config = {term: true, browser: true}
     end
 
@@ -25,8 +31,8 @@ module GiddyUp
     end
 
     def list
-      @pid.each_pair do |key, pid|
-        puts "list : #{key} => #{pid}"
+      @projects.each_pair do |project, config|
+        puts "list : #{project} => #{config.pid}"
       end
     end
 
@@ -47,16 +53,15 @@ module GiddyUp
 
     def start! project
       GiddyUp.logger.debug "start! -> #{project}"
-      @pid[project] = launch project unless @pid.has_key? project
+      @projects[project].pid = launch project unless @projects[project].running?
+      GiddyUp.logger.debug list
     end
 
     def stop! project
       GiddyUp.logger.debug "stop! -> #{project}"
       GiddyUp.logger.debug list
-      unless @pid.empty? # or !@pid.has_key? project
-        kill @pid[project]
-        @pid.delete(@pid[project])
-      end
+      kill @projects[project].pid if @projects[project].running?
+      GiddyUp.logger.debug list
     end
 
     def kill pid

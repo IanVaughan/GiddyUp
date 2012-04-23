@@ -18,11 +18,7 @@ module GiddyUp
 
     get '/' do
       GiddyUp.logger.debug '/'
-      # projects needs to be the hash
-      # {cas => {running:false, port:2000, action:up}}
       @projects = GiddyUp.launcher.projects
-      @port = '3000'
-      @running = false
       erb :index
     end
 
