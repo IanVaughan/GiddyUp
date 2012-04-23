@@ -8,6 +8,7 @@ module GiddyUp
       @pid ||= {}
       @base_path = base_path
       @projects = dirs base_path
+      # config hash
       @open_terminal = true
       @open_browser = true
     end
@@ -56,7 +57,7 @@ module GiddyUp
     def stop! project
       GiddyUp.logger.debug "stop! -> #{project}"
       GiddyUp.logger.debug list
-      unless @pid.empty?
+      unless @pid.empty? # or !@pid.has_key? project
         kill @pid[project]
         @pid.delete(@pid[project])
       end
