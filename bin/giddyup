@@ -13,6 +13,7 @@ when 'server' # Starts the server
   GiddyUp.start
 when 'start'
   launcher.start ARGV.shift
+  launcher.list
 else
   puts 'Unknown or no command given! Options are :-'
   File.open(__FILE__).each_line do |line|
