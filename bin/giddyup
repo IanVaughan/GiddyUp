@@ -26,4 +26,3 @@ end
 
 # projects=%w{cas wld-api-router wld-service-site portal portal-sites wld-service-communication wld-service-member wld-service-search mobile}
 # up.boot_up projects
-# up.list
