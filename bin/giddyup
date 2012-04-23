@@ -9,7 +9,7 @@ launcher = GiddyUp.load Dir.home + '/Projects/'
 
 cmd = ARGV.shift
 case cmd
-when 'server'
+when 'server' # Starts the server
   GiddyUp.start
 when 'start'
   launcher.start 'wld-api-router'
