@@ -21,8 +21,8 @@ module GiddyUp
       return unless valid projects
       projects.each do |project, action|
         GiddyUp.logger.debug "#{__method__} -> #{project}, #{action}"
-        # start! project if action == 'start'
-        # stop! project if action == 'stop'
+        start! project if action == 'start'
+        stop! project if action == 'stop'
       end
     end
 
