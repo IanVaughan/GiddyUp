@@ -1,0 +1,21 @@
+# Works quite well
+
+#   {"up"=>
+#     [{"name"=>"cas", "port"=>3000}, {"name"=>"wld-api-router", "port"=>3001}],
+#    "down"=>[{"name"=>"cas", "pid"=>1000}]}>
+
+# irb(main):012:0> a.up
+# => [{"name"=>"cas", "port"=>3000}, {"name"=>"wld-api-router", "port"=>3001}]
+
+# irb(main):013:0> a.down
+# => [{"name"=>"cas", "pid"=>1000}]
+
+up:
+  - name: cas
+    port: 3000
+  - name: wld-api-router
+    port: 3001
+down:
+  - name: cas
+    pid: 1000
+

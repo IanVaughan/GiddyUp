@@ -1,0 +1,7 @@
+cas:
+  name: nice name
+  action: up
+  port: 2000
+
+wld-api-router:
+  action: down
