@@ -32,8 +32,8 @@ module GiddyUp
     end
 
     def list
-      @projects.each_pair do |project, config|
-        puts "list : #{project} => #{config.pid}"
+      @projects.each_pair do |project_name, config|
+        puts "list : #{project_name} => #{config.pid}" if config.running?
       end
     end
 
