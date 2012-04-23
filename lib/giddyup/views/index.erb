@@ -57,6 +57,7 @@
   <% for @project in @projects %>
     <tr>
       <%= erb :_project_action_select %>
+      <td><%= @project %></td>
       <%= erb :_starter %>
       <%= erb :_linker %>
     </tr>
