@@ -8,14 +8,6 @@ module GiddyUp
       # enable :sessions
     end
 
-    helpers do
-      def format names
-        # "#{name}bar"
-      end
-    end
-
-    base_path = Dir.home
-
     get '/' do
       GiddyUp.logger.debug '/'
       @projects = GiddyUp.launcher.projects
@@ -29,13 +21,7 @@ module GiddyUp
 
     post '/perform' do
       GiddyUp.logger.debug "/perform -> #{params}"
-
-      # GiddyUp.launcher.start params.each_pair.collect { |key, value| key if value == 'start' }.compact
-      # GiddyUp.launcher.stop params.each_pair.collect { |key, value| key if value == 'stop' }.compact
       GiddyUp.launcher.action params
-
-      # test = {'wld-api-router' => 'start'}
-      # GiddyUp.launcher.action test
     end
 
   end

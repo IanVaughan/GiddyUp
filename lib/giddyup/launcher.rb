@@ -20,6 +20,7 @@ module GiddyUp
     # Takes a Hash, where
     # key -> name of project
     # value -> start or stop (or other which is ignored)
+    # eg { 'project_a' => 'start', 'project_b' => 'stop' }
     def action projects
       GiddyUp.logger.debug "#{__method__} -> #{projects}"
       return unless valid projects
@@ -66,8 +67,7 @@ module GiddyUp
 
     def kill pid
       GiddyUp.logger.debug "kill -> #{pid}"
-      # pid && Process.kill(signal, pid)
-      Process.kill(:INT, pid)
+      pid && Process.kill(:INT, pid)
     rescue Errno::ESRCH => e
       GiddyUp.logger.error e
       false
