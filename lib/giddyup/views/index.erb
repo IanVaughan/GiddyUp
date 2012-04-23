@@ -14,6 +14,11 @@
       });
 
       $('a').click(function(e) {
+        console.log('click ' + $(this).text())
+        if ($(this).text() == 'Open') {
+          console.log('returning')
+          return
+        }
         var selected_projects = {};
         selected_projects[$(this).attr('rel')] = $(this).text();
         console.log(selected_projects);
