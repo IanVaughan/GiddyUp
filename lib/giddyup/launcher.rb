@@ -2,7 +2,7 @@ require 'giddyup/term_me'
 
 module GiddyUp
   class Launcher
-    attr_accessor :projects, :open_terminal, :open_browser
+    attr_accessor :projects
 
     def initialize base_path = '.'
       @pid ||= {}
