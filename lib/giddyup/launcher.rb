@@ -62,6 +62,7 @@ module GiddyUp
       GiddyUp.logger.debug "stop! -> #{project}"
       GiddyUp.logger.debug list
       kill @projects[project].pid if @projects[project].running?
+      @projects[project].pid = 0
       GiddyUp.logger.debug list
     end
 
