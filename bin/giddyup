@@ -14,6 +14,8 @@ when 'server' # Starts the server
 when 'start'
   launcher.start ARGV.shift
   launcher.list
+when 'list'
+  launcher.list
 else
   puts 'Unknown or no command given! Options are :-'
   File.open(__FILE__).each_line do |line|
