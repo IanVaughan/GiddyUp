@@ -34,8 +34,12 @@ module GiddyUp
     post '/perform' do
       GiddyUp.logger.debug "/perform -> #{params}"
 
-      GiddyUp.launcher.start params.each_pair.collect { |key, value| key if value == 'start' }.compact
-      GiddyUp.launcher.stop params.each_pair.collect { |key, value| key if value == 'stop' }.compact
+      # GiddyUp.launcher.start params.each_pair.collect { |key, value| key if value == 'start' }.compact
+      # GiddyUp.launcher.stop params.each_pair.collect { |key, value| key if value == 'stop' }.compact
+      GiddyUp.launcher.action params
+
+      # test = {'wld-api-router' => 'start'}
+      # GiddyUp.launcher.action test
     end
 
   end

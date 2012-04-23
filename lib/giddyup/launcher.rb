@@ -13,18 +13,17 @@ module GiddyUp
       @open_browser = true
     end
 
-    def start projects
+    # Takes a Hash, where
+    # key -> name of project
+    # value -> start or stop (or other which is ignored)
+    def action projects
       GiddyUp.logger.debug "#{__method__} -> #{projects}"
       return unless valid projects
-      projects = [projects] unless projects.is_a? Array
-      projects.each { |p| start! p }
-    end
-
-    def stop projects
-      GiddyUp.logger.debug "#{__method__} -> #{projects}"
-      return unless valid projects
-      projects = [projects] unless projects.is_a? Array
-      projects.each { |p| stop! p }
+      projects.each do |project, action|
+        GiddyUp.logger.debug "#{__method__} -> #{project}, #{action}"
+        # start! project if action == 'start'
+        # stop! project if action == 'stop'
+      end
     end
 
     def list
@@ -44,8 +43,7 @@ module GiddyUp
 
     def valid args
       return if args.nil?
-      return if args.is_a? Array and args.empty?
-      return if args.is_a? Hash #and args.empty?
+      return unless args.is_a? Hash or !args.empty?
       true
     end
 
