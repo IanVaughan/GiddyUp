@@ -10,6 +10,7 @@ module GiddyUp
     get '/' do
       GiddyUp.logger.debug '/'
       @projects = GiddyUp.launcher.projects
+      @error = GiddyUp.launcher.error
       erb :index
     end
 

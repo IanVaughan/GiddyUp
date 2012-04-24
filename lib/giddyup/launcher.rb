@@ -3,7 +3,7 @@ require 'giddyup/project'
 
 module GiddyUp
   class Launcher
-    attr_accessor :projects
+    attr_accessor :projects, :error
 
     def initialize base_path = '.'
       @base_path = base_path
@@ -56,6 +56,7 @@ module GiddyUp
       GiddyUp.logger.debug list
       if @projects[project].running?
         GiddyUp.logger.warn "start! -> Seems that #{project} is already running!"
+        @error = "Seems that #{project} is already running!"
       else
         @projects[project].pid, @projects[project].port = launch project
       end
@@ -68,6 +69,7 @@ module GiddyUp
         kill @projects[project].pid
       else
         GiddyUp.logger.warn "stop! -> Could not find #{project} running!"
+        @error = "Could not find #{project} running!"
       end
       @projects[project].pid = 0
       GiddyUp.logger.debug list
