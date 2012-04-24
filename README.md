@@ -46,9 +46,7 @@ Ideas/Todos/roadmap
 
 - on select of quick start link change link to loading gif until its loaded then display stop link
 
-- on press of go button all start/stop links to change to loading gif until
-
-- update to use full twitter bootstrap
+- on press of go button all start/stop links to change to loading gif until loaded
 
 - add field to add/remove base path for projects (remove default path from app)
 
@@ -56,15 +54,17 @@ Ideas/Todos/roadmap
 
 - add field for port number (defaulted from forman, can override)
 
-- add option to open log file in term/tab
+- get options to open log file in term/tab working
 
-- maybe add link to open the log file in tab
+- add link to open the log file in tab
 
 - allow error box to closed by user by clicking on X
 
 - allow error box to timeout autoclose 5 sec
 
-- tighten up table vertical and horiz
+- icons (twitter bootstrap)
+
+- start/stop radios to be set selected/active correctly depending on running project
 
 
 ## Contrib notes
