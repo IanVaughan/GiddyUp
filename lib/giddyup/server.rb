@@ -4,7 +4,7 @@ module GiddyUp
   class Server < Sinatra::Base
 
     configure do
-      set :public_folder, Proc.new { File.join(root, "static") }
+      set :public_folder, Proc.new { File.join(root, "public") }
     end
 
     get '/' do
