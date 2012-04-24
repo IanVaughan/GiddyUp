@@ -1,4 +1,4 @@
-# require "giddyup/version"
+require 'giddyup/version'
 require 'giddyup/launcher'
 require 'giddyup/server'
 require 'logger'
