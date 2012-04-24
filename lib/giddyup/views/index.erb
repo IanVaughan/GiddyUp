@@ -4,8 +4,7 @@
   <script>
     $(document).ready(function() {
       $('#start_btn').click(function(e) {
-        start_projects();
-        stop_projects();
+        collect_projects();
         e.preventDefault();
       });
 
@@ -23,16 +22,11 @@
       });
     });
 
-    function start_projects() {
+    function collect_projects() {
       var selected_projects = {};
       $('input:radio[value=start]:checked').each(function () {
         selected_projects[$(this).attr('name')] = 'start';
       });
-      post_data(selected_projects);
-    }
-
-    function stop_projects() {
-      var selected_projects = {};
       $('input:radio[value=stop]:checked').each(function () {
         selected_projects[$(this).attr('name')] = 'stop';
       });
