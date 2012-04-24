@@ -19,7 +19,7 @@ To start it :-
     bin/giddyup server
 
 
-Ideas/Todos
+Ideas/Todos/roadmap
 -----------
 
 ### Main
@@ -36,20 +36,35 @@ Ideas/Todos
 
 - add call, control and status off, `vm-control`
 
+- server output log to file, not console
 
-### Views
+- make it work for non-foreman servers
+
+- select project name and it cycle round the start/nothing/stop radios
+
+- change start/nothing/stop radios to a traffic light pic
+
+- on select of quick start link change link to loading gif until its loaded then display stop link
+
+- on press of go button all start/stop links to change to loading gif until
+
+- update to use full twitter bootstrap
 
 - add field to add/remove base path for projects (remove default path from app)
 
 - then get projects from dir and not default_projects
 
-- List branches for each project in drop down
-
 - add field for port number (defaulted from forman, can override)
 
 - add option to open log file in term/tab
 
-- maybe add link to open the log file in tabs
+- maybe add link to open the log file in tab
+
+- allow error box to closed by user by clicking on X
+
+- allow error box to timeout autoclose 5 sec
+
+- tighten up table vertical and horiz
 
 
 ## Contrib notes
