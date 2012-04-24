@@ -13,11 +13,6 @@ module GiddyUp
       erb :index
     end
 
-    get '/list/:path' do
-      GiddyUp.logger.debug '/list'
-      puts " #{params[:path]}"
-    end
-
     post '/perform' do
       GiddyUp.logger.debug "/perform -> #{params}"
       GiddyUp.launcher.action params
