@@ -5,10 +5,6 @@
     $(document).ready(function() {
       $('#start_btn').click(function(e) {
         start_projects();
-        e.preventDefault();
-      });
-
-      $('#stop_btn').click(function(e) {
         stop_projects();
         e.preventDefault();
       });
@@ -29,7 +25,7 @@
 
     function start_projects() {
       var selected_projects = {};
-      $('input:checkbox:checked').each(function () {
+      $('input:radio[value=start]:checked').each(function () {
         selected_projects[$(this).attr('name')] = 'start';
       });
       post_data(selected_projects);
@@ -37,7 +33,7 @@
 
     function stop_projects() {
       var selected_projects = {};
-      $('input:checkbox:checked').each(function () {
+      $('input:radio[value=stop]:checked').each(function () {
         selected_projects[$(this).attr('name')] = 'stop';
       });
       post_data(selected_projects);
