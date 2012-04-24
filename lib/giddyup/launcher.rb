@@ -40,7 +40,6 @@ module GiddyUp
   private
 
     def dirs path
-      # Dir.exist?("/tmp") # .keep_if(&:directory?) # all.delete_if { |f| Dir. }
       all = Dir.entries(path)
       all.keep_if { |d| Dir.exist? path + d }
       all.delete_if { |d| d == '.' or d == '..'}
@@ -54,14 +53,22 @@ module GiddyUp
 
     def start! project
       GiddyUp.logger.debug "start! -> #{project}"
-      @projects[project].pid, @projects[project].port = launch project unless @projects[project].running?
       GiddyUp.logger.debug list
+      if @projects[project].running?
+        GiddyUp.logger.warn "start! -> Seems that #{project} is already running!"
+      else
+        @projects[project].pid, @projects[project].port = launch project
+      end
     end
 
     def stop! project
       GiddyUp.logger.debug "stop! -> #{project}"
       GiddyUp.logger.debug list
-      kill @projects[project].pid if @projects[project].running?
+      if @projects[project].running?
+        kill @projects[project].pid
+      else
+        GiddyUp.logger.warn "stop! -> Could not find #{project} running!"
+      end
       @projects[project].pid = 0
       GiddyUp.logger.debug list
     end
