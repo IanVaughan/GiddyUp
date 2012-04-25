@@ -19,5 +19,16 @@ module GiddyUp
       GiddyUp.launcher.action params
     end
 
+    get '/running/:project' do
+      GiddyUp.logger.debug "/running -> #{params}, #{params[:project]}"
+      running = GiddyUp.launcher.running? params[:project]
+      "#{running}"
+    end
+
+    get '/running' do
+      list = GiddyUp.launcher.list
+      "#{list}"
+    end
+
   end
 end
