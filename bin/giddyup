@@ -11,7 +11,7 @@ cmd = ARGV.shift
 case cmd
 when 'server' # Starts the server
   GiddyUp.start
-when 'start'
+when 'start' # starts services without running the web view
   launcher.start ARGV.shift
   launcher.list
 when 'list'
@@ -23,6 +23,3 @@ else
     break if line.include? 'else'
   end
 end
-
-# projects=%w{cas wld-api-router wld-service-site portal portal-sites wld-service-communication wld-service-member wld-service-search mobile}
-# up.boot_up projects

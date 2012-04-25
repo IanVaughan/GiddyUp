@@ -53,7 +53,6 @@ module GiddyUp
 
     def start! project
       GiddyUp.logger.debug "start! -> #{project}"
-      GiddyUp.logger.debug list
       if @projects[project].running?
         GiddyUp.logger.warn "start! -> Seems that #{project} is already running!"
         @error = "Seems that #{project} is already running!"
@@ -64,7 +63,6 @@ module GiddyUp
 
     def stop! project
       GiddyUp.logger.debug "stop! -> #{project}"
-      GiddyUp.logger.debug list
       if @projects[project].running?
         kill @projects[project].pid
       else
@@ -72,7 +70,6 @@ module GiddyUp
         @error = "Could not find #{project} running!"
       end
       @projects[project].pid = 0
-      GiddyUp.logger.debug list
     end
 
     def kill pid
