@@ -38,16 +38,18 @@ Contributing
 1. Commit your changes (`git commit -am 'Added some feature'`)
 1. Push to the branch (`git push origin my-new-feature`)
 1. Create new Pull Request
+1. Create an Issue with a link to your branch
+1. Enjoy a refreshing beer and wait
 
 
 Contributors
 ============
 
-* TimT -> All that JavaScript stuff
+* [TimT](https://twitter.com/#!/timtait) -> All that JavaScript stuff
 
 
-# Licence
-=========
+Licence
+=======
 
 (The MIT License)
 
