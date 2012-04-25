@@ -13,8 +13,6 @@ Roadmap
 
 - add call, control and status off, `vm-control`
 
-- server output log to file, not console
-
 - make it work for non-foreman servers
 
 - select project name and it cycle round the start/nothing/stop radios

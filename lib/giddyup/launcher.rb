@@ -114,6 +114,11 @@ module GiddyUp
         open_web_page port, url if @config[:browser]
 
         pid = fork do
+          # Dir.chdir "/"
+          STDIN.reopen "/dev/null"
+          STDOUT.reopen "/dev/null", "a"
+          STDERR.reopen "/dev/null", "a"
+
           # ENV.update etc
           # exec '. ~/.profile && rbenv shell `cat .rbenv-version` && foreman start > log/foreman.log 2>&1'
           exec GiddyUp.runner, "foreman start" # > log/foreman.log"
