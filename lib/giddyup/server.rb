@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'json'
 
 module GiddyUp
   class Server < Sinatra::Base
@@ -19,15 +20,18 @@ module GiddyUp
       GiddyUp.launcher.action params
     end
 
-    get '/running/:project' do
+    get '/running.json/:project' do
       GiddyUp.logger.debug "/running -> #{params}, #{params[:project]}"
       running = GiddyUp.launcher.running? params[:project]
-      "#{running}"
+      content_type :json
+      running.to_json
     end
 
-    get '/running' do
+    get '/running.json' do
       list = GiddyUp.launcher.list
-      "#{list}"
+      content_type :json
+      list.to_json
+    end
     end
 
   end
