@@ -7,33 +7,36 @@
     <script src="/bootstrap/js/bootstrap-alerts.js"></script>
     <link rel="stylesheet" href="/bootstrap/docs/assets/css/bootstrap.css">
   </head>
-  <body style="padding-top: 50px;">
-  <section id="navigation">
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <h3><a href="/">GiddyUp Starter</a></h3>
+
+  <body style="padding-top: 40px;">
+    <section id="navigation">
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <h3><a href="/">GiddyUp Starter</a></h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <%if @error then %>
+      <div class="alert-message error"><%=@error%>
+        <a class="close" href="#">&times;</a>
+      </div>
+      <% end %>
+
+      <div class="row">
+        <div class="span8">
+          <%= yield %>
+        </div>
+        <div class="span4">
+          <h1>Ya what?</h1>
+          <p>Select some projects, hit Go, and volia, your services are running!</p>
+          <%= erb :_options %>
+          <%= erb :_actions %>
         </div>
       </div>
     </div>
-  </section>
-
-  <div class="container">
-    <%if @error then %>
-      <div class="alert-message error"><%=@error%></div>
-    <% end %>
-
-    <div class="row">
-        <div class="span8">
-            <%= yield %>
-        </div>
-        <div class="span4">
-            <h1>Ya what?</h1>
-            <p>Select some projects, hit Go, and volia, your services are running!</p>
-            <%= erb :_options %>
-            <%= erb :_actions %>
-        </div>
-    </div>
-  </div>
   </body>
 </html>
