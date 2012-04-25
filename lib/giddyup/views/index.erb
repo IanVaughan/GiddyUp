@@ -22,6 +22,23 @@
       });
     });
 
+    function update_running_projects() {
+      $.getJSON("running.json", function(data) {
+        $.each(data, function(key, val) {
+          $('[rel="'+key+'"]').each(function(){
+            if (val)
+              $(this).text('stop')
+            else
+              $(this).text('start')
+          });
+        });
+      });
+    }
+
+    window.setInterval(function(){
+      update_running_projects();
+    }, 5000);
+
     function collect_projects() {
       var selected_projects = {};
       $('input:radio[value=start]:checked').each(function () {
