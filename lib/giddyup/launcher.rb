@@ -35,6 +35,14 @@ module GiddyUp
       @projects.each_pair do |project_name, config|
         GiddyUp.logger.info "list : #{project_name} => #{config.pid}" if config.running?
       end
+      # @projects.to_hash
+      hash = {}
+      @projects.map { |name, config| hash[name] = config.running? }
+      hash
+    end
+
+    def running? project
+      @projects[project].running?
     end
 
   private
