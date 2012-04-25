@@ -33,7 +33,7 @@ module GiddyUp
 
     def list
       @projects.each_pair do |project_name, config|
-        puts "list : #{project_name} => #{config.pid}" if config.running?
+        GiddyUp.logger.info "list : #{project_name} => #{config.pid}" if config.running?
       end
     end
 
