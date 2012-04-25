@@ -4,7 +4,7 @@ module GiddyUp
   class TermMe
 
     def self.open path, project
-      puts path
+
       ItermWindow.current do
         open_tab :my_tab do
           set_title "#{project}"
